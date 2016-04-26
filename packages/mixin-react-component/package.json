@@ -1,0 +1,24 @@
+{
+  "name": "mixin-react-component",
+  "version": "0.0.1",
+  "description": "mixin react components",
+  "main": "./lib/mixin-react-component.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/recotj/react-component-specs.git"
+  },
+  "keywords": [
+    "mixin",
+    "react",
+    "component"
+  ],
+  "author": "reco",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/recotj/react-component-specs/issues"
+  },
+  "homepage": "https://github.com/recotj/react-component-specs#readme"
+}
