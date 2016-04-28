@@ -2,22 +2,8 @@ const React = require('react');
 
 const inherits = require('utils/lib/inherits');
 const mixin = require('utils/lib/mixin');
-const policy = mixin.policy;
 
-const ReactMixinPolicy = {
-	displayName: policy.OVERRIDE_RIGHT,
-	propTypes: policy.OBJECT_MERGE,
-	getInitialState: policy.MERGE,
-	getDefaultProps: policy.MERGE,
-	componentWillMount: policy.CHAIN,
-	componentDidMount: policy.CHAIN,
-	componentWillReceiveProps: policy.CHAIN,
-	componentWillUpdate: policy.CHAIN,
-	componentDidUpdate: policy.CHAIN,
-	componentWillUnmount: policy.CHAIN,
-	componentDidUnmount: policy.CHAIN,
-	render: policy.FLOW
-};
+const ReactMixinPolicy = require('./ReactMixinPolicy');
 
 module.exports = (configs) => {
 	const {statics, instantials} = mixinSpecs(configs);
@@ -32,6 +18,8 @@ module.exports = (configs) => {
 
 	return ReactMixinClass;
 };
+
+module.exports.ReactMixinPolicy = ReactMixinPolicy;
 
 function mixinSpecs(configs) {
 	if (isEmpty(configs)) {

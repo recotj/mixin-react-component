@@ -30,6 +30,7 @@ module.exports = {
 	},
 	processAllSubNodes(element, process, context) {
 		if (typeof process !== 'function') return element;
+
 		process = (child, path, element, next) => {
 			let error, newChild;
 
@@ -71,9 +72,7 @@ function traverseSubNodes(element, process, context) {
 }
 
 
-function traverse(element, process, context, path) {
-	path = path || [];
-
+function traverse(element, process, context, path = '') {
 	const props = element.props;
 	if (!props || Object.keys(props).length === 0) return undefined;
 
@@ -84,8 +83,7 @@ function traverse(element, process, context, path) {
 	if (typeof children !== 'object') return children;
 
 	return React.Children.map(children, (child, key) => {
-		path = path.slice();
-		path.push(key);
+		const subpath = require('path').join(path, key);
 
 		//let error;
 		let shouldContinue = false;
@@ -97,7 +95,7 @@ function traverse(element, process, context, path) {
 			else newChild = data;
 		};
 
-		const breakChild = Reflect.apply(process, context, [child, path, element, next]);
+		const breakChild = Reflect.apply(process, context, [child, subpath, element, next]);
 		// if the next callback is not called yet, then break out of the current traverse.
 		if (shouldContinue === false) return breakChild;
 		// if null, false or undefined value returned after process, it means to remove the child element.
@@ -108,5 +106,5 @@ function traverse(element, process, context, path) {
 			null,
 			traverse(newChild, process, context, path)
 		);
-	}, context || element);
+	}, context);
 }
