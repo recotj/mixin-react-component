@@ -12,7 +12,7 @@ module.exports = {
 
 		return {
 			ref(instance) {
-				// if #ref# and #owner# exists, then reattach the instance to the original owner.
+				// If #ref# and #owner# exists, then reattach the instance to the original owner.
 				if (ref && owner) owner.refs[ref] = instance;
 				this[DESCENDANTS][path] = instance;
 			}
