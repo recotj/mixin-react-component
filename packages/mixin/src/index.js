@@ -6,7 +6,7 @@ const mixin = require('utils/lib/mixin');
 const ReactMixinPolicy = require('./ReactMixinPolicy');
 
 module.exports = (configs) => {
-	const {statics, instantials} = mixinSpecs(configs);
+	const { statics, instantials } = mixinSpecs(configs);
 
 	const ReactMixinClass = class ReactMixinClass {
 	};
@@ -27,7 +27,7 @@ function mixinSpecs(configs) {
 	}
 
 	if (Array.isArray(configs)) {
-		configs = {mixins: configs};
+		configs = { mixins: configs };
 	}
 
 	const mixins = separateMixins(configs.mixins);
@@ -42,21 +42,21 @@ function mixinSpecs(configs) {
 		policy: Object.assign({}, policy.instantials, ReactMixinPolicy)
 	});
 
-	return {statics: staticSpec, ...instanceSpec};
+	return { statics: staticSpec, ...instanceSpec };
 }
 
 function separateMixins(mixins) {
 	return mixins.reduce((ret, mixin) => {
-		const {statics, ...instantials} = mixin;
+		const { statics, ...instantials } = mixin;
 		ret.statics.push(statics);
 		ret.instantials.push(instantials);
 		return ret;
-	}, {statics: [], instantials: []});
+	}, { statics: [], instantials: [] });
 }
 
 function separatePolicy(policy) {
-	const {statics, ...instantials} = policy || {};
-	return {statics, instantials};
+	const { statics, ...instantials } = policy || {};
+	return { statics, instantials };
 }
 
 function isEmpty(obj) {

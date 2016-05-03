@@ -8,7 +8,7 @@ const ValidateState = {
 const DEFAULT_ERROR_TYPE = 0;
 
 module.exports = {
-	statics: {ValidateState},
+	statics: { ValidateState },
 	displayName: 'Validatable',
 
 	propTypes: {
@@ -18,11 +18,11 @@ module.exports = {
 	},
 
 	getInitialState() {
-		return {validateState: ValidateState.DEFAULT, errorType: DEFAULT_ERROR_TYPE};
+		return { validateState: ValidateState.DEFAULT, errorType: DEFAULT_ERROR_TYPE };
 	},
 
 	checkValidity() {
-		const {validateState, errorType} = this.state;
+		const { validateState, errorType } = this.state;
 		if (validateState === ValidateState.SUCCESS) return Promise.resolve(true);
 		if (validateState === ValidateState.FAILED) return Promise.reject(errorType);
 
@@ -31,20 +31,20 @@ module.exports = {
 
 		return executeValidation(validation, values).then(
 			() => {
-				this.setState({validateState: ValidateState.SUCCESS});
+				this.setState({ validateState: ValidateState.SUCCESS });
 				return collectControlValues(controls);
 			},
 			(error) => {
 				let errorType = error || DEFAULT_ERROR_TYPE;
 				if (error instanceof Error) errorType = error.name;
 
-				this.setState({validateState: ValidateState.FAILED, errorType});
+				this.setState({ validateState: ValidateState.FAILED, errorType });
 				throw error;
 			});
 	},
 
 	restore() {
-		this.setState({validateState: ValidateState.DEFAULT, errorType: DEFAULT_ERROR_TYPE});
+		this.setState({ validateState: ValidateState.DEFAULT, errorType: DEFAULT_ERROR_TYPE });
 	},
 
 	get controls() {
@@ -52,10 +52,10 @@ module.exports = {
 	},
 
 	get validationMessage() {
-		const {validateState, errorType} = this.state;
+		const { validateState, errorType } = this.state;
 		if (validateState !== ValidateState.FAILED) return;
 
-		const {errorMessage} = this.props;
+		let {errorMessage} = this.props;
 		if (typeof errorMessage === 'object') errorMessage = errorMessage[errorType];
 
 		return String(errorMessage);

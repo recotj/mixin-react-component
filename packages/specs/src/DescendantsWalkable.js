@@ -1,7 +1,7 @@
 const React = require('react');
 const Policy = require('utils/lib/mixin').PresetPolicy;
-const helpers = require('react-component-specs/lib/helpers');
-const ReactMixinPolicy = require('react-component-specs/lib/mixin-react-component').ReactMixinPolicy;
+const helpers = require('mixin-react-component/lib/helpers');
+const ReactMixinPolicy = require('mixin-react-component/lib/mixin').ReactMixinPolicy;
 
 const DESCENDANTS = Symbol('descendants');
 
